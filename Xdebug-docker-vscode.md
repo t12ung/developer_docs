@@ -69,5 +69,6 @@ Back over to the IDE, we should see the line *highlighted* where we created the 
 
 ## Reference
 https://xdebug.org/
+
 https://github.com/felixfbecker/vscode-php-debug
 
