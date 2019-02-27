@@ -1,6 +1,21 @@
 # Xdebug - Docker - VS Code
 This guide assumes that you have managed to set up your php/apache docker container with Xdebug, so we are just going to concentrate on how to configure the IDE (VS Code) and PHP settings for the docker container.
 
+## Introduction
+One of the most powerful ways to debug your code is using a graphical interface that can intercept your code in a run-time environment. Some things that it will help you to do more efficiently include:
+
+-   conditional/line/function/error type breakpoints
+-   console logging (handy for debugging on live server)
+-   step through your code (in/out/over)
+-   inspect variables and data structures
+-   watch variables as they change
+-   call stack trace
+-   evaluate expressions
+-   profiler to optimize code efficiency
+-   file ignore list to exclude from debug
+
+## Setup
+
 ### php.ini
 Add the following *Xdebug extension* settings to the `php.ini` file for your docker container.
 ```
