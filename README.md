@@ -3,4 +3,4 @@
 # developer_docs
 Collection of HOW-TO Guides for PHP, XDebug, Docker, VSCode...
 
-[XDebug / Docker / VS Code](./Xdebug-docker-vscode.md)
+[Set up XDebug for VS Code using Docker PHP/Apache](./Xdebug-docker-vscode.md)
