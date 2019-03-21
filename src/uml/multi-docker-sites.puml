@@ -1,0 +1,64 @@
+@startuml
+skinparam rectangle {
+  roundCorner 25
+}
+
+package Client [
+
+- Web browser
+- DB client
+
+]
+
+rectangle VM {
+
+cloud nginx [
+""<U+00A0>  Nginx  <U+00A0>""
+""<U+00A0>  Proxy  <U+00A0>""
+
+Ports: 80, 443
+]
+
+database db1 [
+<U+00A0>  MySQL 1  <U+00A0>
+====
+
+Port: 3306
+]
+database db2 [
+<U+00A0>  MySQL 2  <U+00A0>
+====
+
+Port: 3307
+]
+
+}
+
+() "<U+00A0>Port\n3306" as dbweb1
+() "<U+00A0>Port\n3306" as dbweb2
+() "<U+00A0> Ports\n80,443" as pweb1
+() "<U+00A0> Ports\n80,443" as pweb2
+
+node web1 [
+
+Web Server 1
+
+]
+node web2 [
+
+Web Server 2
+
+]
+
+Client - nginx
+Client -- db1
+Client -- db2
+nginx -- pweb1
+pweb1 -- web1
+nginx -- pweb2
+pweb2 -- web2
+db1 -- dbweb1
+dbweb1 -- web1
+db2 -- dbweb2
+dbweb2 -- web2
+@enduml
