@@ -18,7 +18,7 @@ curl "https://raw.githubusercontent.com/jwilder/nginx-proxy/master/nginx.tmpl" >
 
 If you've created SSL certificates for your sites, put them in the `certs` directory. [See this guide if you want to create these](./SSL-localhost-letsencrypt.md).
 
-Create a `docker-compose.yml` inside the container directory. This is for single docker container. If you want to run nginx and docker-gen separately, then check [jwilder/docker](https://github.com/jwilder/docker-gen#separate-container-install) for details.
+Create a file called `docker-compose.yml` inside the container directory. The following is for a single docker container. If you want to run nginx and docker-gen separately, then check [jwilder/docker](https://github.com/jwilder/docker-gen#separate-container-install) for details.
 
 > **`docker-compose.yml`** for docker-nginx-proxy
 ```ini
@@ -43,7 +43,9 @@ networks:
     external:
       name: nginx-proxy
 ```
-Start up the container with `docker-compose up --build`. If everything runs succesfully, we should have our configuration file built automatically in `conf.d` directory.
+Before we can build our docker container for the proxy, we need to create the external network that will be used for the project containers to communicate with the proxy container. To do this, run the command `docker network create nginx-proxy`.
+
+Start up the container with `docker-compose up --build`. If everything runs successfully, we should have our configuration file built automatically in `conf.d` directory.
 
 ### Website Container Set Up
 I won't provide a full `docker-compose.yml` for the websites, check out other guide for how to run docker containers for websites. Instead, I will just emphasize the differences needed to have these containers communicate with the nginx-proxy container.
@@ -66,6 +68,15 @@ networks:
       name: nginx-proxy
 ```
 
-You'll notice that we haven't exposed `port 80` for our webserver, this is handled automatically by nginx so it's not needed to specify it here. The network specified also **matches** that which is specified in `docker-nginx-proxy`, otherwise the two containers would not be able to communicate with eachother. (If your docker-compose files are using a different version, refer to [Reference documentation](https://docs.docker.com/compose/compose-file/) for network configuration settings.
+We don't publish the ports here as you would without running the reverse proxy - these are published in `nginx-proxy` service. Instead we only expose the port to other containers in the network. You should also notice that we haven't exposed `port 443` for our webserver, this is handled automatically by Nginx so it's not needed to specify it here. The network specified also **matches** that which is specified in `docker-nginx-proxy`, otherwise the two containers would not be able to communicate with each other. (If your docker-compose files are using a different version, refer to [Reference documentation](https://docs.docker.com/compose/compose-file/) for network configuration settings.
 
 For the `environment` variables, the minimum is to specify `VIRTUAL_HOST`, otherwise Nginx won't know which container to route a request to. The same value should be added to your machine's host(s) file and point to `127.0.0.1`. Nginx automatically applies the SSL certificates matching the `VIRTUAL_HOST` variable (down to the most specific level in domain tree), if the certficates exist in the `certs` directory. We can optionally point to a specific certificate using the `CERT_NAME` variable. The `HTTPS_METHOD` is also an optional setting.
+
+### Running multiple MySQL database containers
+
+While it's possible to configure Nginx to proxy TCP port 3306 (MySQL default port) - nginx-proxy does not support this, currently (Check the discussion here for more information). Instead, it's easier to just publish each MySQL container on different ports to the localhost. For example:
+```dockerfile
+ports:
+  - "3307:3306"
+```
+With this setting, we can access externally on port 3307, (i.e. MySQL client using `localhost:3307`), whilst our docker containers connect internally on the `nginx-proxy` network on port 3306 (i.e. `<docker_container_name>:3306`).
