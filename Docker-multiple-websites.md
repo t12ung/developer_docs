@@ -1,6 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=plastic)](https://opensource.org/licenses/MIT)
 
-[![Poweredby: docker](https://img.shields.io/badge/docker-v18.09-lightgrey.svg?style=plastic&logo=docker&logoColor=white&labelColor=2496ed)](https://www.docker.com/) [![Poweredby: nginx](https://img.shields.io/badge/nginx-v1.15.9-lightgrey.svg?style=plastic&logo=nginx&logoColor=white&labelColor=047832)](https://github.com/nginxinc/docker-nginx) [![Poweredby: nginx](https://img.shields.io/badge/docker--gen-v0.7.3-lightgrey.svg?style=plastic&logo=nginx&logoColor=white&labelColor=047832)](https://github.com/jwilder/docker-gen)
+[![Poweredby: docker](https://img.shields.io/badge/docker-v18.09.6-lightgrey.svg?style=plastic&logo=docker&logoColor=white&labelColor=2496ed)](https://www.docker.com/) [![Poweredby: nginx](https://img.shields.io/badge/nginx-v1.17.6-lightgrey.svg?style=plastic&logo=nginx&logoColor=white&labelColor=047832)](https://github.com/nginxinc/docker-nginx) [![Poweredby: nginx](https://img.shields.io/badge/docker--gen-v0.7.3-lightgrey.svg?style=plastic&logo=nginx&logoColor=white&labelColor=047832)](https://github.com/jwilder/docker-gen)
 # How to run Multiple Websites (Apache/MySQL) in your local Docker development environment
 To achieve this, we will be using a reverse proxy called Nginx.
 > Nginx (pronounced "engine-x") is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3, and IMAP protocols, as well as a load balancer, HTTP cache, and a web server (origin server).
@@ -18,6 +18,16 @@ curl "https://raw.githubusercontent.com/jwilder/nginx-proxy/master/nginx.tmpl" >
 
 If you've created SSL certificates for your sites, put them in the `certs` directory. [See this guide if you want to create these](./SSL-localhost-letsencrypt.md).
 
+Create a file called `proxy-settings.conf` inside the container directory. Place inside here any additional proxy-wide nginx settings you require.
+
+For dev/debug purposes, the following settings can be useful:
+```
+proxy_connect_timeout       5m;
+proxy_send_timeout          5m;
+proxy_read_timeout          60m;
+send_timeout                5m;
+```
+
 Create a file called `docker-compose.yml` inside the container directory. The following is for a single docker container. If you want to run nginx and docker-gen separately, then check [jwilder/docker](https://github.com/jwilder/docker-gen#separate-container-install) for details.
 
 > **`docker-compose.yml`** for docker-nginx-proxy
@@ -32,7 +42,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./conf.d:/etc/nginx/conf.d
+      - ./proxy-settings.conf:/etc/nginx/conf.d/proxy-settings.conf
       - ./vhost.d:/etc/nginx/vhost.d
       - ./certs:/etc/nginx/certs
       - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
