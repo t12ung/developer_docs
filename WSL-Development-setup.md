@@ -20,12 +20,12 @@ enable copy/paste via right-click by setting `quickEdit: true`.
     
 Run HT and enter the following commands to install zsh:
 ```shell
-bash
-sudo apt-get install curl
-sudo apt-add-repository ppa:git-core/ppa
-sudo apt-get update
-sudo apt-get install git
-sudo apt-get install zsh
+$ bash
+$ sudo apt-get install curl
+$ sudo apt-add-repository ppa:git-core/ppa
+$ sudo apt-get update
+$ sudo apt-get install git
+$ sudo apt-get install zsh
 ```
 
 ### 4. Default ZSH for Hyper Terminal
@@ -44,14 +44,14 @@ Quit HT and restart HT to confirm (shell prompt should have some color now!).
 
 To change the default shell from bash to zsh, we need to run:
 ```shell
-chsh -s /usr/bin/zsh
+$ chsh -s /usr/bin/zsh
 ```
 Quit HT and restart it, then check the default shell with `env | grep SHELL`.
 
 ### 5. Configuring ZSH using Oh-My-Zsh
 Run the following commands to install a customized Z Shell environment:
 ```shell
-curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
+$ curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
 ```
 Let's add some plugins to help make life easier in zsh. A list of default plugins included with oh-my-zsh can be found
 in [~/.oh-my-zsh/plugins](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins). Here are some suggested
@@ -108,15 +108,15 @@ Go to the Taskbar tray App for Docker and open Settings. Enable the checkbox for
 
 Run the following commands:
 ```shell
-sudo apt-get install -y apt-transport-https ca-certificates software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo apt-key fingerprint 0EBFCD88
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt-get update -y
-sudo apt-get install -y docker-ce
-sudo usermod -aG docker $USER
-sudo apt-get install -y python python-pip
-sudo pip install docker-compose
+$ sudo apt-get install -y apt-transport-https ca-certificates software-properties-common
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ sudo apt-key fingerprint 0EBFCD88
+$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+$ sudo apt-get update -y
+$ sudo apt-get install -y docker-ce
+$ sudo usermod -aG docker $USER
+$ sudo apt-get install -y python python-pip
+$ sudo pip install docker-compose
 ```
 For docker CLI to be able to find the windows docker daemon, add the following to `~/.zshrc`:
 ```shell
@@ -142,88 +142,88 @@ with other third-party software.
 
 For use in our WSL environment, simply make a symbolic link wherever is convenient for you, e.g.
 ```shell
-sudo ln -s /c/workspace /workspace
+$ sudo ln -s /c/workspace /workspace
 ```
 
 ### 9. CLI git and GitHub
 Before you start using git, you should configure it before making any commits. Recommended set up:
 ```shell
-git config --global user.name "John Doe"
-git config --global user.email johndoe@example.com
-git config --global core.editor nano
-git config --global core.autocrlf input
-git config --global core.filemode false
-git config --global core.excludesfile ~/.gitignore_global
-git config --global commit.template ~/.gitmessage.txt
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+$ git config --global core.editor nano
+$ git config --global core.autocrlf input
+$ git config --global core.filemode false
+$ git config --global core.excludesfile ~/.gitignore_global
+$ git config --global commit.template ~/.gitmessage.txt
 ```
 If you had enable gitignore plugin for oh-my-zsh, you can generate the ignore file, e.g.
 ```shell
-gi windows,composer,visualstudiocode > ~/.gitignore_global
+$ gi windows,composer,visualstudiocode > ~/.gitignore_global
 ```
 Whatever convention/style you choose to make commits for the project; you should define the template in the
 `~/.gitmessage.txt` file.
 
 Create your SSH key with the command: 
 ```shell
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
 Copy the contents of the public key (default file is `id_rsa.pub`), then go to your Profile settings on GitHub. In
 `SSH and GPG keys`, add a `New SSH Key` and give a meaningful Title (e.g. _WSL HyperT_). Paste the contents of the
 public key, but beware of any line-breaks that may have been inserted by the application you used to view the public
 key. You can test it with the following command:
 ```shell
-ssh -T git@github.com
+$ ssh -T git@github.com
 ```
 You may want to copy the WSL `~/.ssh` directory to your windows home directory to allow other 3rd party apps easy access
 to the same ssh keys.
 
 ### 10. PHP7
 ```shell
-sudo apt-get install php php-xml php-mbstring zip unzip php-curl
+$ sudo apt-get install php php-xml php-mbstring zip unzip php-curl
 ```
 
 ### 11. composer PHP Package Manager
 ```shell
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
+$ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+$ php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+$ php composer-setup.php
+$ php -r "unlink('composer-setup.php');"
 ```
 After installing, it is recommended that you move the composer file to a general bin folder, e.g.
 ```shell
-mv composer.phar /usr/local/bin/composer
+$ mv composer.phar /usr/local/bin/composer
 ```
 
 ### 12. NPM JavasScript Package Manager
 ```shell
-sudo apt-get install npm
+$ sudo apt-get install npm
 ```
 
 ### 13. AWS CLI
 Ubuntu comes pre-installed with `python` (v2) and `python3`. We will be using python3 to install AWS CLI. You can check
 the version with `python3 -V`. First lets update our packages so make sure we're up to date on current versions.
 ```shell
-sudo apt-get update
-sudo apt-get -y upgrade
+$ sudo apt-get update
+$ sudo apt-get -y upgrade
 ```
 Next we need to install `pip` (Python Package Index) package manager.
 ```shell
-sudo apt-get install python3-distutils
-curl -O https://bootstrap.pypa.io/get-pip.py
-python3 get-pip.py --user
+$ sudo apt-get install python3-distutils
+$ curl -O https://bootstrap.pypa.io/get-pip.py
+$ python3 get-pip.py --user
 ```
 The `--user` option installs pip to `~/.local/bin`, so lets add this to our `PATH` environment variable. It is also a
 good idea to install the AWS CLI command completer (If you are not using `zsh`, then load the appropriate script for your
 shell).
 ```shell
-export PATH=~/.local/bin:$PATH
-source ~/.local/bin/aws_zsh_completer.sh
+$ export PATH=~/.local/bin:$PATH
+$ source ~/.local/bin/aws_zsh_completer.sh
 ```
 You can verify successful installation by sourcing the `.zshrc` file and then running `pip3 --version`.
 
 Now that we have the necessary requirements, lets install AWS CLI...
 ```shell
-pip3 install awscli --upgrade --user
+$ pip3 install awscli --upgrade --user
 ```
 To verify installation, run `aws --version`.
 
@@ -232,21 +232,21 @@ Security Credentials. Create an access key to use for the AWS CLI credentials. N
 enter your credentials. You will be asked for a default region name - specify the **region** that matches where your
 AWS instances are located.
 ```shell
-aws configure
+$ aws configure
 ```
 
 ### 14. Setting the LOCALE for your Terminal
 By default, the en_US locale is already installed.
 ```shell
-sudo locale-gen en_GB.UTF-8
+$ sudo locale-gen en_GB.UTF-8
 ```
 To set the LOCALE, run the following command - you will need to restart your terminal for the changes to take effect.
 ```shell
-sudo update-locale LANG=en_GB.UTF-8
+$ sudo update-locale LANG=en_GB.UTF-8
 
 or
 
-sudo update-locale LANG=en_US.UTF-8
+$ sudo update-locale LANG=en_US.UTF-8
 ```
 To confirm your locale settings are correct, run the command `locale` on both your local terminal and on the remote host
 via SSH and check if they match.
@@ -263,11 +263,11 @@ It makes sense to link to the same excludes file we created for WSL, so we'll ne
 rootfs directory mentioned earlier. Either use a `Git Bash shell` or `Windows Command Prompt` to run additional git
 configuration (just essential options) for how you intend to use Windows git tools.
 ```shell
-git config --global user.name "John Doe"
-git config --global user.email johndoe@example.com
-git config --global core.autocrlf input
-git config --global core.filemode false
-git config --global core.excludesfile C:\\Users\\<windows_username>\\AppData\\Local\\Packages\\CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc\\LocalState\\rootfs\\home\\<WSL_username>\\.gitignore_global
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+$ git config --global core.autocrlf input
+$ git config --global core.filemode false
+$ git config --global core.excludesfile C:\\Users\\<windows_username>\\AppData\\Local\\Packages\\CanonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc\\LocalState\\rootfs\\home\\<WSL_username>\\.gitignore_global
 ```
 
 SourceTree has it own configuration settings so apply the same settings appropriately. Do be sure to **remember** and

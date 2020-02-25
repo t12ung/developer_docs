@@ -38,13 +38,13 @@ dns_cloudflare_api_key = "your-api-key"
 
 ##### Generate Certificate
 ```shell
-sudo certbot certonly -d "dev.example.com,*.dev.example.com" --dns-cloudflare --dns-cloudflare-credentials <path_to_file>/cloudflare.ini --dns-cloudflare-propagation-seconds 10
+$ sudo certbot certonly -d "dev.example.com,*.dev.example.com" --dns-cloudflare --dns-cloudflare-credentials <path_to_file>/cloudflare.ini --dns-cloudflare-propagation-seconds 10
 ```
 The above command can also be used to _**renew certificates for specific domains**_. Generated certificate files are not physically in the `live` directory as the letscrypt output suggests - these are sym links to actual files in 'archive' directory. The files we are interested in for our site(s) are `cert` and `privkey` pem files. These correlate to `<domain>.crt` and `<domain>.key` respectively. On a production system, you should also implement the `chain` file for OCSP Stapling. 
 
 ##### Renew All Certificates
 ```shell
-sudo certbot renew --dns-cloudflare --dns-cloudflare-credentials <path_to_file>/cloudflare.ini --dns-cloudflare-propagation-seconds 10
+$ sudo certbot renew --dns-cloudflare --dns-cloudflare-credentials <path_to_file>/cloudflare.ini --dns-cloudflare-propagation-seconds 10
 ```
 
 ##### Outro
