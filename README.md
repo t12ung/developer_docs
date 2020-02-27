@@ -12,3 +12,7 @@ Collection of Development HOW-TO Guides for PHP, XDebug, Docker, VSCode...
 [SSL Certificates for localhost/development or production server using Let's Encrypt](./SSL-localhost-letsencrypt.md)
 
 [Running Multiple Web Sites on localhost using Docker](./Docker-multiple-websites.md)
+
+[Managing Server Software packages (CENTOS)](./Managing-Server-Software-packages-CENTOS.md)
+
+[Helpful Shell alias/scripts](./Shell-scripts-aliases.md)

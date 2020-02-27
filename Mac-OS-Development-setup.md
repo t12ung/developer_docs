@@ -1,4 +1,6 @@
-Mac OS Development Environment Set Up Guide
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=plastic)](https://opensource.org/licenses/MIT)
+
+# Mac OS Development Environment Set Up Guide
 
 ### 1. Install Xcode
 Search for it in the App Store. You should also install the CLI Tools:
