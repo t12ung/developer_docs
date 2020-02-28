@@ -179,7 +179,17 @@ to the same ssh keys.
 
 ### 10. PHP7
 ```shell
-$ sudo apt-get install php php-xml php-mbstring zip unzip php-curl
+$ sudo apt-get install php php-xml php-mbstring php-intl zip unzip php-curl
+```
+
+### 10a. Update PHP
+If you need to update your PHP version, this example is for updating from 7.2 to 7.3:
+```shell
+sudo add-apt-repository ppa:ondrej/php
+sudo apt update
+sudo apt install php7.3
+sudo apt install $(apt list --installed | grep php7.2- | cut -d'/' -f1 | sed -e 's/7.2/7.3/g')
+sudo apt remove $(apt list --installed | grep php7.2 | cut -d'/' -f1)
 ```
 
 ### 11. composer PHP Package Manager
