@@ -2,7 +2,7 @@
 
 ##### Git - Reset files based on status attribute
 ```shell
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Color vars
 _RST_='\033[0m'  #reset
@@ -66,7 +66,7 @@ git stash apply stash@{${1}}
 
 ##### Git - Show current branch's parent
 ```shell
-!/usr/bin/env zsh
+#!/usr/bin/env zsh
 
 git show-branch -a \
 | grep '\*' \
@@ -77,8 +77,8 @@ git show-branch -a \
 ```
 
 ##### Rsync
-```shell script
-!/bin/bash
+```shell
+#!/usr/bin/env bash
 
 # Color vars
 _RST_='\033[0m'  #reset

@@ -110,34 +110,47 @@ for documentation purposes.
 $ brew install tree
 ```
 
-### 8. Install Bash Completion
+### 8. Update Bash version
+```shell
+$ brew install bash
+```
+
+### 9. Install Bash Completion
 This brings up shell command completion after a double `Tab` key press.
 ```shell
 $ brew install bash-completion
 ```
 
-### 9. Update Vim to latest version
+### 10. Update Vim to latest version
 ```shell
 $ brew install vim
 ```
 
-### 10. Install Ultimate Vim configuration
+### 11. Install Ultimate Vim configuration
 ```shell
 git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
 ```
 
-### 11. Install Composer Package Manager
+### 12. Update nano to latest version
+```shell
+$ brew install nano
+```
+
+### 13. Install nanorc Syntax Highlighting
+https://github.com/scopatz/nanorc
+
+### 14. Install Composer Package Manager
 ```shell
 $ brew install composer
 ```
 
-### 12. Install Node Package Manager
+### 15. Install Node Package Manager
 ```shell
 $ brew install npm
 ```
 
-### 13. Others
+### 16. Others
 While the previous suggestions are my own personal selection, you might find others here:
 https://sourabhbajaj.com/mac-setup/
 
